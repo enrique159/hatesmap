@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <ExampleMap/>
-    <NavBarSax/>
+    <!-- <NavBarSax/> -->
     <BottomBar/>
   </div>
 </template>
@@ -19,3 +19,12 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.home {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

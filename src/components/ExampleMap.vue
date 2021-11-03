@@ -22,7 +22,7 @@
 
 <script>
 import Mapbox from "mapbox-gl";
-import { exampleStaticData } from "@/plugins/static-data.js"
+import { exampleStaticData } from "@/common/static-data.js"
 import {
   MglMap,
   MglNavigationControl,
@@ -65,9 +65,10 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: calc(100vh - 60px);
+  //height: calc(100vh - 60px);
+  //padding-top: 60px;
+  height: 100vh;
   width: 100%;
-  padding-top: 60px;
   overflow-y: hidden !important;
 
   .marcador {

@@ -1,36 +1,40 @@
 <template>
   <div class="container">
     <div class="map">
-      <img class="icono" src="@/assets/icons/map.svg" alt="">
-      <span :class="{ 'active' : selected}"></span>
+      <img class="icono" src="@/assets/icons/map.svg" alt="" />
+      <span :class="{ active: selected }"></span>
     </div>
-    <div class="agregar">
-      <img class="icono" src="@/assets/icons/plus.svg" alt="">
+    <div class="category">
+      <img class="icono" src="@/assets/icons/category.svg" alt="" />
+    </div>
+    <vs-button circle icon floating dark>
+      <img class="icono" src="@/assets/icons/plus.svg" alt="" />
+    </vs-button>
+    <div class="category">
+      <img class="icono" src="@/assets/icons/star.svg" alt="" />
     </div>
     <div class="profile">
-      <img class="perfil" src="@/assets/icons/profile.svg" alt="">
+      <img class="perfil" src="@/assets/icons/profile.svg" alt="" />
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'BottomBar',
-    data() {
-      return {
-        selected: true
-      }
-    },
-    methods: {
-
-    }
-  }
+export default {
+  name: "BottomBar",
+  data() {
+    return {
+      selected: true,
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
 .container {
   background-color: white;
-  -webkit-box-shadow: 0px 16px 36px 22px rgba(0, 0, 0, 0.1); 
+  -webkit-box-shadow: 0px 16px 36px 22px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 16px 36px 22px rgba(0, 0, 0, 0.1);
   border-radius: 28px;
   position: fixed;
@@ -39,15 +43,17 @@
   justify-content: space-around;
   box-sizing: border-box;
   align-items: center;
+  padding: 0 12px;
   height: 64px;
-  width: 80%;
+  width: 90%;
+  max-width: 480px;
   bottom: 36px;
-  left: 10%;
+  margin: 0 auto;
   z-index: 30;
 
   .agregar {
     background-color: black;
-    -webkit-box-shadow: 0px 8px 18px 4px rgba(0, 0, 0, 0.409); 
+    -webkit-box-shadow: 0px 8px 18px 4px rgba(0, 0, 0, 0.409);
     box-shadow: 0px 8px 18px 4px rgba(0, 0, 0, 0.403);
     border-radius: 50%;
     padding: 8px;
@@ -65,7 +71,7 @@
     position: relative;
     .active {
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         background-color: black;
         bottom: -6px;
