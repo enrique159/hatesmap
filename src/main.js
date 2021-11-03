@@ -4,8 +4,13 @@ import router from './router'
 import store from './store'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
+import VueMapbox from "vue-mapbox";
+import Mapbox from "mapbox-gl";
 
 Vue.config.productionTip = false
+
+Vue.use(VueMapbox, { mapboxgl: Mapbox });
 Vue.use(Vuesax, {
   // options here
 })
