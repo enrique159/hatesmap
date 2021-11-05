@@ -7,6 +7,7 @@ import 'vuesax/dist/vuesax.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import VueMapbox from "vue-mapbox";
 import Mapbox from "mapbox-gl";
+import 'boxicons'
 
 Vue.config.productionTip = false
 

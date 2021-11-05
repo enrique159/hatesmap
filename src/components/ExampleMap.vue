@@ -3,26 +3,34 @@
     <MglMap :accessToken="accessToken" :mapStyle="mapStyle" @load="onMapLoaded">
       <MglNavigationControl position="top-left" />
       <MglGeolocateControl position="top-left" />
-      <MglMarker v-for="item in markers" :coordinates="item.coordinates" :key="item.id">
-        <img class="marcador" src="@/assets/icons/marker.svg" slot="marker" @click="selectMarker(item.id)" />
+      <MglMarker
+        v-for="item in markers"
+        :coordinates="[item.Long, item.Lat]"
+        :key="item.id"
+      >
+        <img
+          class="marcador"
+          src="@/assets/icons/marker.svg"
+          slot="marker"
+          @click="selectMarker(item.id)"
+        />
       </MglMarker>
     </MglMap>
 
-    <vs-dialog overflow-hidden full-screen v-model="active">
+    <vs-dialog overflow-hidden v-model="active">
       <template #header>
         <h4 class="not-margin">Informacion del lugar</h4>
       </template>
-
-      <div class="contenido">
-        <h3 class="name">{{ selectedMarker.name }}</h3>
-      </div>
+      <CardContent :puesto="selectedMarker"/>
     </vs-dialog>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import Mapbox from "mapbox-gl";
-import { exampleStaticData } from "@/common/static-data.js"
+import { exampleStaticData } from "@/common/static-data.js";
+import CardContent from "@/components/CardContent.vue";
 import {
   MglMap,
   MglNavigationControl,
@@ -32,29 +40,51 @@ import {
 
 export default {
   name: "ExampleMap",
-  components: { MglMap, MglNavigationControl, MglGeolocateControl, MglMarker},
+  components: { MglMap, MglNavigationControl, MglGeolocateControl, MglMarker, CardContent },
   data() {
     return {
-      accessToken: "pk.eyJ1IjoiZW5yaWtlMTU5IiwiYSI6ImNrdml6NWlvYWNwa3IycG56NWRzNzVvc3QifQ.POKhqV37-hGkEs4jA6dWyA",
+      accessToken:
+        "pk.eyJ1IjoiZW5yaWtlMTU5IiwiYSI6ImNrdml6NWlvYWNwa3IycG56NWRzNzVvc3QifQ.POKhqV37-hGkEs4jA6dWyA",
       mapStyle: "mapbox://styles/enrike159/cjuwtsxus02h51fpw502l7ixq",
       active: false,
       markers: null,
-      selectedMarker: '',
+      selectedMarker: "",
+      percentCompleted: 0,
     };
   },
-  created() {
+  async created() {
     this.mapbox = Mapbox;
     this.markers = exampleStaticData;
+    await axios
+      .get("https://hatesmaps.herokuapp.com/carritos", {
+        onDownloadProgress: (progressEvent) => {
+          let percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          console.log(progressEvent.lengthComputable);
+          console.log(percentCompleted);
+        },
+      })
+      .then((result) => {
+        this.markers = result.data;
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
+    getMarker(id) {
+      return this.markers.find((marker) => marker.id === id);
+    },
     selectMarker(i) {
       this.active = !this.active;
-      this.selectedMarker = this.markers[i];
+      this.selectedMarker = this.getMarker(i);
     },
     async onMapLoaded(event) {
       const asyncActions = event.component.actions;
       const newParams = await asyncActions.flyTo({
-        center: [-110.298, 24.144],
+        center: [-110.320255, 24.140917],
         zoom: 12,
         speed: 5,
       });
@@ -70,43 +100,15 @@ export default {
   height: 100vh;
   width: 100%;
   overflow-y: hidden !important;
-
   .marcador {
+    object-fit: contain;
     width: 40px;
     height: 40px;
   }
 }
 .not-margin {
-	margin: 0px;
-	font-weight: normal;
-	padding: 10px;
+  margin: 0px;
+  font-weight: normal;
+  padding: 10px;
 }
-.contenido {
-  background-color: blue;
-}
-.footer-dialog {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: calc(100%);
-	.new {
-		margin: 0px;
-		margin-top: 20px;
-		padding: 0px;
-		font-size: 0.7rem;
-		a {
-			color: var(--vs-primary);
-			margin-left: 6px;
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-	}
-	.vs-button {
-		margin: 0px;
-	}
-}
-
-
 </style>
