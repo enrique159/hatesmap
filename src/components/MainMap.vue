@@ -97,6 +97,10 @@ export default {
 .container {
   //height: calc(100vh - 60px);
   //padding-top: 60px;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100%;
   overflow-y: hidden !important;
