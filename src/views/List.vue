@@ -23,7 +23,7 @@ import ListDisplay from '../components/ListDisplay.vue'
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-sizing: border-box;
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   display: flex;
   padding: 36px 18px;

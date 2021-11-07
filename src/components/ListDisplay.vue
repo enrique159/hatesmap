@@ -2,7 +2,7 @@
   <div class="lista">
     <div class="lista_item" v-for="item in items" :key="item.index">
       <vs-row>
-        <vs-avatar>
+        <vs-avatar color="#7d33ff">
           <i class="bx bx-map"></i>
         </vs-avatar>
         <div class="infor">

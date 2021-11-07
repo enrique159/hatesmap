@@ -21,7 +21,7 @@
       <template #header>
         <h4 class="not-margin">Informacion del lugar</h4>
       </template>
-      <CardContent :puesto="selectedMarker"/>
+      <CardContent :puesto="selectedMarker" />
     </vs-dialog>
   </div>
 </template>
@@ -29,7 +29,7 @@
 <script>
 import axios from "axios";
 import Mapbox from "mapbox-gl";
-import store from '@/store/index.js'
+import store from "@/store/index.js";
 import CardContent from "@/components/CardContent.vue";
 import {
   MglMap,
@@ -40,7 +40,13 @@ import {
 
 export default {
   name: "ExampleMap",
-  components: { MglMap, MglNavigationControl, MglGeolocateControl, MglMarker, CardContent },
+  components: {
+    MglMap,
+    MglNavigationControl,
+    MglGeolocateControl,
+    MglMarker,
+    CardContent,
+  },
   data() {
     return {
       accessToken:
@@ -93,6 +99,7 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   overflow-y: hidden !important;
   .marcador {

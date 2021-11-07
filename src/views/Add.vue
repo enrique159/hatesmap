@@ -17,7 +17,7 @@
   background: rgba($color: #FFF, $alpha: 0.6);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   display: flex;
   justify-content: center;
