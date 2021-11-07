@@ -1,14 +1,19 @@
 <template>
   <div class="container">
     <div class="fade-effect">
-      <h1>List Hates</h1>
+      <h1 class="title">Lista de Hates</h1>
+      <ListDisplay />
     </div>
   </div>
 </template>
 
 <script>
+import ListDisplay from '../components/ListDisplay.vue'
   export default {
     name: 'List',
+    components: {
+      ListDisplay
+    },
   }
 </script>
 
@@ -17,13 +22,19 @@
   background: rgba($color: #FFF, $alpha: 0.6);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  height: 100vh;
+  box-sizing: border-box;
+  height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 36px 18px;
+  overflow-y: hidden !important;
   .fade-effect {
     animation: fadeIn 0.5s ease-in-out;
+    width: 100%;
+  }
+
+  .title {
+    margin: 0 0 24px;
   }
 }
 

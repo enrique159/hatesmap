@@ -29,7 +29,7 @@
 <script>
 import axios from "axios";
 import Mapbox from "mapbox-gl";
-import { exampleStaticData } from "@/common/static-data.js";
+import store from '@/store/index.js'
 import CardContent from "@/components/CardContent.vue";
 import {
   MglMap,
@@ -54,20 +54,11 @@ export default {
   },
   async created() {
     this.mapbox = Mapbox;
-    this.markers = exampleStaticData;
     await axios
-      .get("https://hatesmaps.herokuapp.com/carritos", {
-        onDownloadProgress: (progressEvent) => {
-          let percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          console.log(progressEvent.lengthComputable);
-          console.log(percentCompleted);
-        },
-      })
+      .get("https://hatesmaps.herokuapp.com/carritos")
       .then((result) => {
         this.markers = result.data;
-        console.log(result.data);
+        store.state.markers = result.data;
       })
       .catch((error) => {
         console.log(error);
@@ -101,9 +92,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  overflow-y: hidden !important;
   .marcador {
     object-fit: contain;
     width: 40px;

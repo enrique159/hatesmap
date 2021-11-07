@@ -8,7 +8,7 @@
       <img class="icono" src="@/assets/icons/category.svg" alt="" />
       <span :class="{ active: selected[1].active }"></span>
     </div>
-    <vs-button circle icon floating dark style="margin: 0 24px" @click="select(2), openPage(2)">
+    <vs-button circle icon floating dark style="margin: 0 8px" @click="select(2), openPage(2)">
       <img class="icono" src="@/assets/icons/plus.svg" alt="" />
     </vs-button>
     <div class="boton" @click="select(3), openPage(3)">
@@ -98,7 +98,6 @@ export default {
   justify-content: space-around;
   box-sizing: border-box;
   align-items: center;
-  padding: 0 8px;
   height: 64px;
   width: 90%;
   max-width: 480px;
@@ -115,7 +114,10 @@ export default {
     justify-content: center;
     align-items: center;
     height: 56px;
-    width: 78px;
+    width: 62px;
+    &:hover {
+      background-color: #f6f6f6;
+    }
     &:active {
       background-color: #d9d9d9;
     }
