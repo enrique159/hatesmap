@@ -94,6 +94,7 @@ export default {
   left: 0;
   height: 100vh;
   width: 100%;
+  overflow-y: hidden !important;
   .marcador {
     object-fit: contain;
     width: 40px;
