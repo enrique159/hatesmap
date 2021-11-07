@@ -8,6 +8,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import VueMapbox from "vue-mapbox";
 import Mapbox from "mapbox-gl";
 import 'boxicons'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
