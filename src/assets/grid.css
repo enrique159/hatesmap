@@ -17,6 +17,12 @@
 .j-end {
   justify-content: flex-end !important;
 }
+.j-between {
+  justify-content: space-between !important;
+}
+.j-around {
+  justify-content: space-around !important;
+}
 
 .a-center {
   align-items: center !important;
@@ -27,6 +33,7 @@
 .a-end {
   align-items: flex-end !important;
 }
+
 
 /* MARGIN */
 .m-0 {
