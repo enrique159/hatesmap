@@ -100,8 +100,8 @@
       </vs-col>
       <vs-col class="dflex j-center a-center pl-2" w="7">
         <button
-          class="botones getRel m-0 dflex j-center a-center"
-          :disabled="!puesto.RelMenu"
+          class="botones m-0 dflex j-center a-center"
+          :class="puesto.RelMenu ? 'getRel' : 'getRelDisabled'"
           @click="openLink(puesto.RelMenu)"
         >
           <img src="@/assets/icons/cubiertos.svg" alt="" />
@@ -112,7 +112,7 @@
     <!-- -------------------- AVISO ------------------------- -->
     <vs-row class="dflex j-center a-center mt-4 aviso-reporte">
       <p>¿Algo de esta información es erróneo o desactualizado?</p>
-      <a href="">Haz click aqui para reportar</a>
+      <a href="#" >Haz click aqui para reportar</a>
     </vs-row>
   </div>
 </template>
@@ -248,10 +248,10 @@ export default {
       rgb(34, 180, 253) 0%,
       rgb(0, 55, 255) 100%
     );
-    -webkit-box-shadow: 0px 16px 24px -8px #03abff59;
-    box-shadow: 0px 16px 24px -8px #03abff59;
+    -webkit-box-shadow: 0px 16px 24px -8px #0095ff8d;
+    box-shadow: 0px 16px 24px -8px #0095ff8d;
     &:hover {
-      box-shadow: 0px 16px 24px -2px #0d76e056;
+      box-shadow: 0px 16px 24px -2px rgba(0, 145, 255, 0.692);
     }
   }
   .getRel {
@@ -261,6 +261,9 @@ export default {
     &:hover {
       box-shadow: 0px 16px 24px -2px #2805b469;
     }
+  }
+  .getRelDisabled {
+    background-color: #e2e2e2;
   }
   .aviso-reporte {
     p,

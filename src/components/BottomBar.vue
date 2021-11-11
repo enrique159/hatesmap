@@ -76,7 +76,7 @@ export default {
           this.$router.push({ name: "Favorites" });
           break;
         case 4:
-          this.$router.push({ name: "SignUp" });
+          this.$router.push({ name: "User" });
           break;
         default:
           this.$router.push({ name: "Home" });

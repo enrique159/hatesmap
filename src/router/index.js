@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import List from '../views/List.vue'
 import Add from '../views/Add.vue'
 import Favorites from '../views/Favorites.vue'
-import SignUp from '../views/SignUp.vue'
+import User from '../views/User.vue'
 
 Vue.use(VueRouter)
 
@@ -30,9 +30,9 @@ const routes = [
     component: Favorites
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp
+    path: '/user',
+    name: 'User',
+    component: User
   }
 ]
 
