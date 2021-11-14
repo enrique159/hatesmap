@@ -1,38 +1,26 @@
 <template>
   <div class="dflex j-center a-center w-100 absoluto">
-    <form id="signUp_Form" v-on:submit.prevent="checkForm" class="dflex fd-col j-end">
+    <form id="signIn_Form" v-on:submit.prevent="checkForm" class="dflex fd-col j-center">
       <div class="field mb-4">
-        <i class='bx bx-user bx-sm icono'></i>
-        <input
-          type="text"
-          id="userName_SignUp"
-          placeholder="Nombre de usuario"
-        />
-      </div>
-      <div class="field mb-4">
-        <i class='bx bx-envelope bx-sm icono'></i>
+        <i class="bx bx-envelope bx-sm icono"></i>
         <input
           type="email"
           name="email"
-          id="email_SignUp"
+          id="email_SignIn"
           placeholder="Correo electrónico"
         />
       </div>
       <div class="field mb-4">
-        <i class='bx bx-lock-open bx-sm icono' ></i>
+        <i class="bx bx-lock-open bx-sm icono"></i>
         <input
           type="password"
           name="password"
-          id="password_SignUp"
+          id="password_SignIn"
           placeholder="Contraseña"
         />
       </div>
-      <vs-button 
-        circle
-        gradient type="submit" 
-        class="botonSubmit"
-      >
-        Crear Usuario
+      <vs-button circle type="submit" class="botonSubmit">
+        Ingresar
       </vs-button>
     </form>
   </div>
@@ -55,9 +43,9 @@ export default {
 .absoluto {
   position: absolute;
   top: 0;
-  left: 100%;
+  left: 0;
 }
-#signUp_Form {
+#signIn_Form {
   width: 80%;
   height: 280px;
   max-width: 360px;
@@ -90,6 +78,8 @@ export default {
     font-weight: 800;
     font-family: "Givonic";
     padding: 8px 12px 6px;
+
+    background-color: #4c00ff;
     margin: 0;
   }
 }
