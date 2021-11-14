@@ -26,11 +26,13 @@ import ListDisplay from '../components/ListDisplay.vue'
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   display: flex;
+  justify-content: center;
   padding: 36px 18px;
   overflow-y: hidden !important;
   .fade-effect {
     animation: fadeIn 0.5s ease-in-out;
     width: 100%;
+    max-width: 480px;
   }
 
   .title {
