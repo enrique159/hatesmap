@@ -34,6 +34,7 @@ export default {
   .logInScreen {
     width: 100%;
     height: 80%;
+    animation: fadeIn 0.5s ease-in-out;
     .spacer {
       height: 30%;
     }

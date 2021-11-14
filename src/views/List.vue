@@ -37,13 +37,4 @@ import ListDisplay from '../components/ListDisplay.vue'
     margin: 0 0 24px;
   }
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 </style>
