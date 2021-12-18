@@ -49,9 +49,8 @@ export default {
   },
   data() {
     return {
-      accessToken:
-        "pk.eyJ1IjoiZW5yaWtlMTU5IiwiYSI6ImNrdml6NWlvYWNwa3IycG56NWRzNzVvc3QifQ.POKhqV37-hGkEs4jA6dWyA",
-      mapStyle: "mapbox://styles/enrike159/cjuwtsxus02h51fpw502l7ixq",
+      accessToken: this.$store.state.mapboxToken,
+      mapStyle: this.$store.state.mapboxStyle,
       active: false,
       markers: null,
       selectedMarker: "",
@@ -61,7 +60,7 @@ export default {
   async created() {
     this.mapbox = Mapbox;
     await axios
-      .get("https://hatesmaps.herokuapp.com/carritos")
+      .get("carritos")
       .then((result) => {
         this.markers = result.data;
         store.state.markers = result.data;

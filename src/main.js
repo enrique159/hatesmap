@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Vuesax from 'vuesax'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import 'vuesax/dist/vuesax.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import VueMapbox from "vue-mapbox";
@@ -12,10 +14,15 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
+Vue.use(VueAxios, axios)
 Vue.use(VueMapbox, { mapboxgl: Mapbox });
 Vue.use(Vuesax, {
   // options here
 })
+
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+//axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`  
+axios.defaults.baseURL = 'https://hatesmaps.herokuapp.com/'
 
 new Vue({
   router,
