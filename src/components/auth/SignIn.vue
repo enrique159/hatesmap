@@ -1,5 +1,5 @@
 <template>
-  <div class="dflex j-center a-center w-100 absoluto">
+  <div class="dflex fd-col j-center a-center w-100 absoluto">
     <form id="signIn_Form" v-on:submit.prevent="checkForm" class="dflex fd-col j-center">
       <div class="field mb-4">
         <i class="bx bx-envelope bx-sm icono"></i>
@@ -25,6 +25,9 @@
         Ingresar
       </vs-button>
     </form>
+    <vs-alert :color="danger" v-model="active" :progress="progress">
+      {{ errorMessage }}
+    </vs-alert>
   </div>
 </template>
 
@@ -42,6 +45,10 @@ export default {
       errorMessage: "",
       errorStatus: "",
       loading: false,
+      danger: 'danger',
+      active: false,
+      time: 6000,
+      progress: 0
     };
   },
   methods: {
@@ -50,12 +57,18 @@ export default {
       this.errorMessage = "";
       if (this.email.length < 1) {
         this.error = true;
+        this.active = true;
         this.errorMessage = "El correo electrónico es requerido";
       } else if (this.password.length < 1) {
         this.error = true;
+        this.active = true;
         this.errorMessage = "La contraseña es requerida";
       } else {
-        this.signIn();
+        if(!this.validarEmail(this.email)) {
+          this.error = true;
+          this.active = true;
+          this.errorMessage = "El correo electrónico no es válido";
+        } else this.signIn();
       }
       e.stopPropagation();
       e.preventDefault();
@@ -75,20 +88,41 @@ export default {
         setToken(res.data.jwt);
         setUser(res.data.user);
         store.state.loggedIn = true;
-        console.log('JWT: ', store.state.token);
-        console.log('User: ', store.state.user);
         this.loading = false;
       })
       .catch(err => {
         this.error = true;
-        this.errorMessage = err.response.data.message;
+        this.active = true;
+        this.errorMessage = err.response.data.message[0].messages[0].message;
         this.errorStatus = err.response.status;
         console.log(this.errorStatus, this.errorMessage)
         this.password = "";
         this.loading = false;
       });
+    },
+    validarEmail(email) {
+      return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
     }
   },
+  watch: {
+    active(val) {
+      if(val) {
+        var interval = setInterval(() => {
+          this.progress++
+        }, this.time / 100);
+
+        setTimeout(() => {
+          this.active = false
+          clearInterval(interval)
+          this.progress = 0
+        }, this.time);
+      }
+    }
+  }
 };
 </script>
 
