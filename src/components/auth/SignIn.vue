@@ -6,6 +6,7 @@
         <input
           type="email"
           name="email"
+          v-model="email"
           id="email_SignIn"
           placeholder="Correo electrónico"
         />
@@ -15,11 +16,12 @@
         <input
           type="password"
           name="password"
+          v-model="password"
           id="password_SignIn"
           placeholder="Contraseña"
         />
       </div>
-      <vs-button circle type="submit" class="botonSubmit">
+      <vs-button :loading="loading" circle type="submit" class="botonSubmit">
         Ingresar
       </vs-button>
     </form>
@@ -27,14 +29,65 @@
 </template>
 
 <script>
+import store  from '@/store'
+import { setToken, setUser, setLoggedIn } from "@/services/auth";
+import axios from 'axios';
 export default {
   name: "SignUp",
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: false,
+      errorMessage: "",
+      errorStatus: "",
+      loading: false,
+    };
+  },
   methods: {
     checkForm(e) {
-      console.log("si jala");
+      this.error = false;
+      this.errorMessage = "";
+      if (this.email.length < 1) {
+        this.error = true;
+        this.errorMessage = "El correo electrónico es requerido";
+      } else if (this.password.length < 1) {
+        this.error = true;
+        this.errorMessage = "La contraseña es requerida";
+      } else {
+        this.signIn();
+      }
       e.stopPropagation();
       e.preventDefault();
     },
+    async signIn() {
+      this.loading = true;
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      const credenciales = {
+        identifier: this.email,
+        password: this.password
+      };
+      await delay(500);
+      await axios.post('auth/local',credenciales)
+      .then((res) => {
+        window.localStorage.setItem('jwt', res.data.jwt)
+        window.localStorage.setItem('user', JSON.stringify(res.data.user))
+        setToken(res.data.jwt);
+        setUser(res.data.user);
+        store.state.loggedIn = true;
+        console.log('JWT: ', store.state.token);
+        console.log('User: ', store.state.user);
+        this.loading = false;
+      })
+      .catch(err => {
+        this.error = true;
+        this.errorMessage = err.response.data.message;
+        this.errorStatus = err.response.status;
+        console.log(this.errorStatus, this.errorMessage)
+        this.password = "";
+        this.loading = false;
+      });
+    }
   },
 };
 </script>

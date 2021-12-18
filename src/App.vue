@@ -9,6 +9,7 @@
 <script>
 import MainMap from "./components/MainMap.vue";
 import BottomBar from "@/components/BottomBar.vue";
+import { setToken, setUser, setLoggedIn } from "@/services/auth";
 export default {
   name: "App",
   components: {
@@ -24,6 +25,8 @@ export default {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty("--vh", `${vh}px`);
     });
+    setToken(window.localStorage.getItem("jwt"));
+    setUser(JSON.parse(window.localStorage.getItem("user")));
   },
 };
 </script>

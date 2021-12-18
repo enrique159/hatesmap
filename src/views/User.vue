@@ -1,6 +1,6 @@
 <template>
   <div class="container dflex fd-col j-start a-center">
-    <div class="logInScreen dflex fd-col j-around a-center">
+    <div v-if="getUser" class="logInScreen dflex fd-col j-around a-center">
       <vs-row class="logotipo dflex j-center a-center">
         <img src="@/assets/logo.svg" alt="" />
         <h4>Hates Map</h4>
@@ -24,6 +24,7 @@
 import AboutUs from "@/components/about/AboutUs.vue";
 import SignUp from "@/components/auth/SignUp.vue";
 import SignIn from "@/components/auth/SignIn.vue";
+import store from "@/store";
 export default {
   name: "User",
   components: {
@@ -36,6 +37,13 @@ export default {
       signup: false,
     };
   },
+  computed: {
+    getUser() {
+      if(store.getters.getUser) {
+        return Object.keys(store.getters.getUser).length === 0
+      } else return true
+    },
+  }
 };
 </script>
 
