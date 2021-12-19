@@ -2,6 +2,7 @@
   <div class="container">
     <div class="fade-effect">
       <h1>Agregar Hates</h1>
+      <span>Aquí podrás agregar Hates al mapa</span>
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   .fade-effect {
     animation: fadeIn 0.5s ease-in-out;
   }

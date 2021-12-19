@@ -34,7 +34,6 @@ export default {
   components: {
     SignUp,
     SignIn,
-    AboutUs,
     ProfileUser
   },
   data() {

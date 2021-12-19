@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="fade-effect">
-      <h1>Favorites</h1>
+      <h1>Favoritos</h1>
+      <span>Aqui es donde se guardan tus Hates</span>
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   .fade-effect {
     animation: fadeIn 0.5s ease-in-out;
   }
