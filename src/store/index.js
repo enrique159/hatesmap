@@ -8,7 +8,6 @@ export default new Vuex.Store({
     markers: [],
     mapboxToken: "pk.eyJ1IjoiZW5yaWtlMTU5IiwiYSI6ImNrdml6NWlvYWNwa3IycG56NWRzNzVvc3QifQ.POKhqV37-hGkEs4jA6dWyA",
     mapboxStyle: "mapbox://styles/enrike159/cjuwtsxus02h51fpw502l7ixq",
-    loggedIn: false,
     token: '',
     user: {},
   },
@@ -19,9 +18,6 @@ export default new Vuex.Store({
     getToken: state => {
       return state.token;
     },
-    getLoggedIn: state => {
-      return state.loggedIn;
-    }
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -30,12 +26,6 @@ export default new Vuex.Store({
     SET_USER: (state, user) => {
       state.user = user;
     },
-    SET_LOGGED_IN: (state) => {
-      state.loggedIn = true;
-    },
-    SET_LOGGED_OUT: (state) => {
-      state.loggedIn = false;
-    }
   },
   actions: {
     setToken: ({ commit }, { token }) => {
@@ -44,12 +34,6 @@ export default new Vuex.Store({
     setUser: ({ commit }, { user }) => {
       commit('SET_USER', user);
     },
-    setLoggedIn: ({ commit }) => {
-      commit('SET_LOGGED_IN');
-    },
-    setLoggedOut: ({ commit }) => {
-      commit('SET_LOGGED_OUT');
-    }
   },
   modules: {
   }

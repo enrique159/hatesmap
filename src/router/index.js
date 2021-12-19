@@ -5,6 +5,7 @@ import List from '../views/List.vue'
 import Add from '../views/Add.vue'
 import Favorites from '../views/Favorites.vue'
 import User from '../views/User.vue'
+import AboutUs from '../views/AboutUs.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User
+  },
+  {
+    path: '/about',
+    name: 'AboutUs',
+    component: AboutUs
   }
 ]
 

@@ -17,13 +17,17 @@
         <SignUp class="transicion" :class="{ 'banish-right': signup }" />
       </div>
     </div>
+    <div v-else class="profileUser fade-effect">
+      <h1 class="title">Mi perfil</h1>
+      <ProfileUser />
+    </div>
   </div>
 </template>
 
 <script>
-import AboutUs from "@/components/about/AboutUs.vue";
 import SignUp from "@/components/auth/SignUp.vue";
 import SignIn from "@/components/auth/SignIn.vue";
+import ProfileUser from "@/components/ProfileUser.vue";
 import store from "@/store";
 export default {
   name: "User",
@@ -31,6 +35,7 @@ export default {
     SignUp,
     SignIn,
     AboutUs,
+    ProfileUser
   },
   data() {
     return {
@@ -56,6 +61,21 @@ export default {
   overflow-x: hidden;
   width: 100%;
   text-align: center;
+
+  .fade-effect {
+    animation: fadeIn 0.5s ease-in-out;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .profileUser {
+    box-sizing: border-box;
+    text-align: left;
+    padding: 36px 4px;
+    .title {
+      margin: 0 0 24px 14px;
+    }
+  }
 
   .logInScreen {
     width: 100%;

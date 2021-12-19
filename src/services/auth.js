@@ -3,9 +3,10 @@ import axios from 'axios'
 import store from  '../store'
 
 export function logoutUser() {
-  axios.defaults.headers.common['Authorization'] = ''
   store.dispatch("setToken", "")
   store.dispatch("setUser", {})
+  window.localStorage.removeItem("jwt")
+  window.localStorage.removeItem("user")
 }
 
 export function setToken(token) {
