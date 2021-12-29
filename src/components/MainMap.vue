@@ -23,6 +23,11 @@
       </template>
       <CardContent :puesto="selectedMarker" />
     </vs-dialog>
+    <div class="alerta">
+      <vs-alert :color="danger" v-model="error">
+        {{ errorMessage }}
+      </vs-alert>
+    </div>
   </div>
 </template>
 
@@ -54,7 +59,9 @@ export default {
       active: false,
       markers: null,
       selectedMarker: "",
-      percentCompleted: 0,
+      danger: 'danger',
+      errorMessage: "",
+      error: false
     };
   },
   async created() {
@@ -67,6 +74,8 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        this.error = true;
+        this.errorMessage = 'Error: ' + error.response.data.message;
       });
   },
   methods: {
@@ -111,5 +120,15 @@ export default {
   margin: 0px;
   font-weight: normal;
   padding: 10px;
+}
+.alerta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 48px;
+  box-sizing: border-box;
+  height: fit-content;
+  z-index: 10;
 }
 </style>

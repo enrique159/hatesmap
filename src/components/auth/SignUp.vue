@@ -1,11 +1,12 @@
 <template>
-  <div class="dflex j-center a-center w-100 absoluto">
+  <div class="dflex fd-col j-center a-center w-100 absoluto">
     <form id="signUp_Form" v-on:submit.prevent="checkForm" class="dflex fd-col j-end">
       <div class="field mb-4">
         <i class='bx bx-user bx-sm icono'></i>
         <input
           type="text"
           id="userName_SignUp"
+          v-model="username"
           placeholder="Nombre de usuario"
         />
       </div>
@@ -14,6 +15,7 @@
         <input
           type="email"
           name="email"
+          v-model="email"
           id="email_SignUp"
           placeholder="Correo electrónico"
         />
@@ -23,31 +25,119 @@
         <input
           type="password"
           name="password"
+          v-model="password"
           id="password_SignUp"
           placeholder="Contraseña"
         />
       </div>
       <vs-button 
         circle
-        gradient type="submit" 
+        gradient 
+        :loading="loading"
+        type="submit" 
         class="botonSubmit"
       >
         Crear Usuario
       </vs-button>
     </form>
+    <vs-alert :color="danger" v-model="active" :progress="progress">
+      {{ errorMessage }}
+    </vs-alert>
   </div>
 </template>
 
 <script>
+import store  from '@/store'
+import { setToken, setUser } from "@/services/auth";
+import { validarEmail } from '@/common/utils.js'
+import axios from 'axios';
 export default {
   name: "SignUp",
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+      error: false,
+      errorMessage: "",
+      errorStatus: "",
+      loading: false,
+      danger: 'danger',
+      active: false,
+      time: 6000,
+      progress: 0
+    };
+  },
   methods: {
     checkForm(e) {
-      console.log("si jala");
+      this.error = false;
+      this.errorMessage = "";
+      if(this.username < 1){
+        this.error = true;
+        this.active = true;
+        this.errorMessage = "El nombre de usuario es requerido";
+      } else if (this.email.length < 1) {
+        this.error = true;
+        this.active = true;
+        this.errorMessage = "El correo electrónico es requerido";
+      } else if (this.password.length < 1) {
+        this.error = true;
+        this.active = true;
+        this.errorMessage = "La contraseña es requerida";
+      } else {
+        if(!validarEmail(this.email)) {
+          this.error = true;
+          this.active = true;
+          this.errorMessage = "El correo electrónico no es válido";
+        } else this.signUn();
+      }
       e.stopPropagation();
       e.preventDefault();
     },
+    async signUn() {
+      this.loading = true;
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      const credenciales = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      };
+      await delay(500);
+      await axios.post('auth/local/register',credenciales)
+      .then((res) => {
+        window.localStorage.setItem('jwt', res.data.jwt)
+        window.localStorage.setItem('user', JSON.stringify(res.data.user))
+        setToken(res.data.jwt);
+        setUser(res.data.user);
+        store.state.loggedIn = true;
+        this.loading = false;
+      })
+      .catch(err => {
+        this.error = true;
+        this.active = true;
+        this.errorMessage = err.response.data.message[0].messages[0].message;
+        this.errorStatus = err.response.status;
+        console.log(this.errorStatus, this.errorMessage)
+        this.password = "";
+        this.loading = false;
+      });
+    },
   },
+  watch: {
+    active(val) {
+      if(val) {
+        var interval = setInterval(() => {
+          this.progress++
+        }, this.time / 100);
+
+        setTimeout(() => {
+          this.active = false
+          clearInterval(interval)
+          this.progress = 0
+        }, this.time);
+      }
+    }
+  }
 };
 </script>
 

@@ -20,8 +20,6 @@ Vue.use(Vuesax, {
   // options here
 })
 
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-//axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`  
 axios.defaults.baseURL = 'https://hatesmaps.herokuapp.com/'
 
 new Vue({

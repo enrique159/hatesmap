@@ -34,6 +34,7 @@
 <script>
 import store  from '@/store'
 import { setToken, setUser, setLoggedIn } from "@/services/auth";
+import { validarEmail } from '@/common/utils.js'
 import axios from 'axios';
 export default {
   name: "SignUp",
@@ -64,7 +65,7 @@ export default {
         this.active = true;
         this.errorMessage = "La contraseña es requerida";
       } else {
-        if(!this.validarEmail(this.email)) {
+        if(!validarEmail(this.email)) {
           this.error = true;
           this.active = true;
           this.errorMessage = "El correo electrónico no es válido";
@@ -100,13 +101,6 @@ export default {
         this.loading = false;
       });
     },
-    validarEmail(email) {
-      return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-    }
   },
   watch: {
     active(val) {
